@@ -24,9 +24,14 @@ def encrypt(msg):
             result+=chr(cipher.item(i,j)+65)
     return (result,cipher,division)
 
-def decrypt(result,cipher,division):
+def decrypt(result,division):
     mainmsg=""
+    mylist = []
 
+    for i in result:
+        mylist.append(ord(i)-65)
+
+    cipher=matrix(array(mylist).reshape(3,4))
     cipher = division*26+cipher
     plain = cipher*inv(hkey)
 
@@ -41,4 +46,4 @@ result,cipher,division = encrypt(msg)
 
 print("Plain text : "+msg)
 print("Encrypted text : "+result)
-print("Decrypted text : "+decrypt(result,cipher,division))
+print("Decrypted text : "+decrypt(result,division))
